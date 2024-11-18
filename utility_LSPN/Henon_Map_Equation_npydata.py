@@ -56,19 +56,13 @@ X = np.load("utility_LSPN/henon_map_data.npy")
 print(X.shape)
 import numpy as np
 
-# 过滤掉含有inf或NaN数据的轨迹
-def remove_invalid_trajectories(X):
-    # 检查每个轨迹中的所有数据点是否包含inf或NaN
-    valid_trajectories = [trajectory for trajectory in X if not np.any(np.isinf(trajectory) | np.isnan(trajectory))]
 
-    # 将有效轨迹重新转换为数组形式
+def remove_invalid_trajectories(X):
+
+    valid_trajectories = [trajectory for trajectory in X if not np.any(np.isinf(trajectory) | np.isnan(trajectory))]
     return np.array(valid_trajectories)
 
-# 使用该函数过滤X数组
 X_filtered = remove_invalid_trajectories(X)
-
-# 检查过滤后的数组形状
-print("过滤后的数组形状:", X_filtered.shape)
 
 np.save("henon_map_data_filtered.npy", X_filtered)
 
